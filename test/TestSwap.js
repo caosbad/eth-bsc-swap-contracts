@@ -89,7 +89,7 @@ contract('ETHSwapAgent and BSCSwapAgent', (accounts) => {
             assert.ok(error.toString().includes("not registered token"))
         }
 
-        let swapTx = await ethSwap.swapETH2BSC(ERC20ABC.address, "100000", {from: accounts[0], value:web3.utils.toBN(10000000)});
+        let swapTx = await ethSwap.swapETH2BSC(ERC20ABC.address, "100000", {from: accounts[0], value:web3.utils.toBN(100000)});
 
         truffleAssert.eventEmitted(swapTx, "SwapStarted",(ev) => {
             swapTxFromETH2BSC = swapTx.tx;

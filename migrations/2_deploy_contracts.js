@@ -21,7 +21,12 @@ module.exports = function(deployer, network, accounts) {
         await deployer.deploy(ERC20EMPTYNAME);
 
         await deployer.deploy(BEP20TokenImplementation);
-        await deployer.deploy(BSCSwapAgentImpl, BEP20TokenImplementation.address, "10000000000000000", bep20ProxyAdmin);
-        await deployer.deploy(ETHSwapAgentImpl, "10000000");
+        // await deployer.deploy(BSCSwapAgentImpl, BEP20TokenImplementation.address, "10000000000000000", bep20ProxyAdmin);
+        // await deployer.deploy(ETHSwapAgentImpl, "10000000");
+        const BSCSwap = await deployer.deploy(BSCSwapAgentImpl)
+        BSCSwap.initialize(BEP20TokenImplementation.address, '10000000000000000', owner, bep20ProxyAdmin)
+        const ETHSwap = await deployer.deploy(ETHSwapAgentImpl)
+        ETHSwap.initialize('100000', owner)
+
     });
 };
